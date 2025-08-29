@@ -1,0 +1,51 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    int lower_bound = 50;
+    int upper_bound = 100;
+    int playAgain = 1; // flag to control replay
+
+    srand(time(NULL)); // Seed random generator once
+
+    while (playAgain) // game loop
+    {
+        int value = (rand() % (upper_bound - lower_bound + 1)) + lower_bound;
+        int n;
+        int chance = 5;
+
+        printf("\n🎯 New Game Started! Guess the number between %d and %d!\n", lower_bound, upper_bound);
+
+        for (int count = chance; count > 0; count--)
+        {
+            printf("\nChances left: %d\n", count);
+            printf("Enter your guess: ");
+            scanf("%d", &n);
+
+            if (n == value) {
+                printf("🎉 Great guess!! You won!\n");
+                break; // exit guessing loop
+            }
+            else if (n < value) {
+                printf("The value is more than your guess!!\n");
+            }
+            else {
+                printf("The value is less than your guess!!\n");
+            }
+
+            if (count == 1) {
+                printf("\n😢 Sorry, you're out of chances. The number was %d\n", value);
+            }
+        }
+
+        // Ask user if they want to play again
+        printf("\nDo you want to play again? (1 = Yes, 0 = No): ");
+        scanf("%d", &playAgain);
+    }
+
+    printf("\n👋 Thanks for playing! Goodbye!\n");
+    return 0;
+}
